@@ -16,9 +16,7 @@ class GoogleDocSvc(Svc):
         self.doc_service = self._build_doc_service()
         self.drive_service = self._build_drive_service()
         self.document_id = self._get_or_create_doc(document_name)
-        
-        print("Document id is " + str(self.document_id))
-        
+
     def _get_creds(self):
         creds = None
         if os.path.exists('token.pickle'):
@@ -55,10 +53,10 @@ class GoogleDocSvc(Svc):
         ).execute()
         files = results.get('files', [])
         if files:
-            print("File found")
+            print("Найден файл: " + doc_name)
             return files[0]['id']
         else:
-            print("File created")
+            print("Создан новый файл: " + doc_name)
             doc = self.doc_service.documents().create(body={'title': doc_name}).execute()
             return doc['documentId']
 

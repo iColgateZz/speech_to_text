@@ -26,7 +26,7 @@ class SpeechToTextModel:
                 channels=1,
                 callback=self._callback
             ):
-                print("Скажите что-нибудь...")
+                print("Говорите")
                 while True:
                     data = self.q.get()
                     if self.recognizer.AcceptWaveform(data):
@@ -38,4 +38,4 @@ class SpeechToTextModel:
                     else:
                         partial = self.recognizer.PartialResult()
         except KeyboardInterrupt:
-            print("Заканиваем")
+            print("Завершение работы")

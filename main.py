@@ -7,7 +7,8 @@ SAMPLE_RATE = 16_000
 BLOCKSIZE = 4_000
 
 def main():
-    svc = GoogleDocSvc("New")
+    file_name = input("Введите название файла: ")
+    svc = GoogleDocSvc(file_name)
     stt = SpeechToTextModel(MODEL_PATH, SAMPLE_RATE, BLOCKSIZE, svc)
     stt.run()
 
