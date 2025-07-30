@@ -3,14 +3,18 @@ import sounddevice as sd
 import queue
 import json
 from vosk import Model, KaldiRecognizer
-from svc import Svc
+from svc.svc import Svc
+
+MODEL_PATH = "vosk-model-small-ru-0.22"
+SAMPLE_RATE = 16_000
+BLOCKSIZE = 4_000
 
 class SpeechToTextModel:
-    def __init__(self, model_path: str, sample_rate: int, blocksize: int, svc: Svc):
-        self.model = Model(model_path)
-        self.recognizer = KaldiRecognizer(self.model, sample_rate)
-        self.sample_rate = sample_rate
-        self.blocksize = blocksize
+    def __init__(self, svc: Svc):
+        self.model = Model(MODEL_PATH)
+        self.recognizer = KaldiRecognizer(self.model, SAMPLE_RATE)
+        self.sample_rate = SAMPLE_RATE
+        self.blocksize = BLOCKSIZE
         self.svc = svc
         self.q = queue.Queue()
 

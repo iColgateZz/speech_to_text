@@ -1,5 +1,5 @@
 # google_doc_svc.py
-from svc import Svc
+from svc.svc import Svc
 import os
 import pickle
 from googleapiclient.discovery import build
