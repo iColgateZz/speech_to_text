@@ -11,6 +11,10 @@ SCOPES = [
     'https://www.googleapis.com/auth/drive.readonly'
 ]
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CREDENTIALS_PATH = os.path.join(BASE_DIR, 'credentials.json')
+TOKEN_PATH = os.path.join(BASE_DIR, 'token.pickle')
+
 class GoogleDocSvc(Svc):
     def __init__(self, document_name: str):
         self.doc_service = self._build_doc_service()
@@ -19,17 +23,17 @@ class GoogleDocSvc(Svc):
 
     def _get_creds(self):
         creds = None
-        if os.path.exists('token.pickle'):
-            with open('token.pickle', 'rb') as token:
+        if os.path.exists(TOKEN_PATH):
+            with open(TOKEN_PATH, 'rb') as token:
                 creds = pickle.load(token)
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', SCOPES)
+                    CREDENTIALS_PATH, SCOPES)
                 creds = flow.run_local_server(port=0)
-            with open('token.pickle', 'wb') as token:
+            with open(TOKEN_PATH, 'wb') as token:
                 pickle.dump(creds, token)
         return creds
 
