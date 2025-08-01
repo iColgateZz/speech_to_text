@@ -2,6 +2,8 @@ cachetools==5.5.2
 certifi==2025.7.14
 cffi==1.17.1
 charset-normalizer==3.4.2
+customtkinter==5.2.2
+darkdetect==0.8.0
 google-api-core==2.25.1
 google-api-python-client==2.176.0
 google-auth==2.40.3
@@ -11,6 +13,7 @@ googleapis-common-protos==1.70.0
 httplib2==0.22.0
 idna==3.10
 oauthlib==3.3.1
+packaging==25.0
 proto-plus==1.26.1
 protobuf==6.31.1
 pyasn1==0.6.1
